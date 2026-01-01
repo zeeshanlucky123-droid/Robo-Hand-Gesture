@@ -1,0 +1,47 @@
+
+#include <WiFi.h>
+
+#include <HTTPClient.h>
+
+const char* serverAddress = "https://scattershot-glaze.000webhostapp.com/get2_data.php"; // Your PHP script URL
+const int serverPort = 80;
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  WiFi.begin("Shani", "shani123");
+  while(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print("..");
+    delay(200);
+  }
+  Serial.println();
+  Serial.println("NodeMCU is Connected!");
+  Serial.println(WiFi.localIP());
+
+}
+
+
+void loop() {
+    if (WiFi.status() == WL_CONNECTED) {
+        int flexValue = analogRead(26); // Read your flex sensor here
+
+        // Construct the request URL with the sensor value as a parameter
+        String url = String(serverAddress) + "?sensor_value=" + String(flexValue);
+
+        HTTPClient http;
+        http.begin(url); // Specify the complete URL with parameters
+
+        int httpResponseCode = http.GET(); // Send the GET request
+
+        if (httpResponseCode > 0) {
+            String response = http.getString();
+            Serial.println("HTTP Response code: " + String(httpResponseCode));
+            Serial.println("Response: " + response);
+        } else {
+            Serial.println("Error in HTTP GET request");
+        }
+
+        http.end();
+    }
+    delay(5000); // Adjust delay as needed before sending the next data
+}
