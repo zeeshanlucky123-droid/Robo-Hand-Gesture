@@ -29,6 +29,6 @@ Designed and 3D-printed a fully functional robotic hand, integrated with Arduino
 
 **Applications:**  
 - Educational and research purposes in IoT and robotics  
-- Demonstrates integration of hardware, software, and cloud servi[Project Report.pdf](https://github.com/user-attachments/files/24402993/Project.Report.pdf)
+- Demonstrates integration of hardware, software, and cloud servi[Project Report.pdf](https://github.com/user-attachments/files/24402993/Project.Report.pd)
 ces  
 - Can be extended for AI-based gesture control and automation projects
